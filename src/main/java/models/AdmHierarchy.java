@@ -5,26 +5,18 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import lombok.NoArgsConstructor;
 
-@JacksonXmlRootElement(localName = "ADDRESSOBJECTS")
+@JacksonXmlRootElement(localName = "ITEM")
 @JsonIgnoreProperties(ignoreUnknown = true)
 @NoArgsConstructor
-public class Object {
+public class AdmHierarchy {
 	@JacksonXmlProperty(localName = "ID")
 	private String id;
 	@JacksonXmlProperty(localName = "OBJECTID")
 	private String objectId;
-	@JacksonXmlProperty(localName = "OBJECTGUID")
-	private String objectGUID;
+	@JacksonXmlProperty(localName = "PARENTOBJID")
+	private String parentObjId;
 	@JacksonXmlProperty(localName = "CHANGEID")
 	private String changeId;
-	@JacksonXmlProperty(localName = "NAME")
-	private String name;
-	@JacksonXmlProperty(localName = "TYPENAME")
-	private String typename;
-	@JacksonXmlProperty(localName = "LEVEL")
-	private String level;
-	@JacksonXmlProperty(localName = "OPERTYPEID")
-	private String operTypeId;
 	@JacksonXmlProperty(localName = "PREVID")
 	private String prevId;
 	@JacksonXmlProperty(localName = "NEXTID")
@@ -35,8 +27,12 @@ public class Object {
 	private String startDate;
 	@JacksonXmlProperty(localName = "ENDDATE")
 	private String endDate;
-	@JacksonXmlProperty(localName = "ISACTUAL")
-	private String isActual;
 	@JacksonXmlProperty(localName = "ISACTIVE")
 	private String isActive;
+
+	@Override
+	public String toString() {
+		return "AdmHierarchy{id='%s', objectId='%s', parentObjId='%s', changeId='%s', prevId='%s', nextId='%s', updateDate='%s', startDate='%s', endDate='%s', isActive='%s'}"
+				.formatted(id, objectId, parentObjId, changeId, prevId, nextId, updateDate, startDate, endDate, isActive);
+	}
 }

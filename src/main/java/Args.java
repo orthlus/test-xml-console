@@ -5,6 +5,10 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
+
+import static java.util.Optional.empty;
+import static java.util.Optional.of;
 
 @Slf4j
 public class Args {
@@ -50,4 +54,24 @@ public class Args {
 	private LocalDate date;
 	@Parameter(names = {"-objects", "-o"}, variableArity = true, description = "required for task 1. list number with comma delimiter")
 	private List<Integer> objectIds;
+
+	public Optional<String> getObjectsFile() {
+		return objectsFilePath == null ? empty() : of(objectsFilePath);
+	}
+
+	public Optional<String> getHierarchyFile() {
+		return hierarchyFilePath == null ? empty() : of(hierarchyFilePath);
+	}
+
+	public Optional<Integer> taskId() {
+		return taskId == 1 || taskId == 2 ? of(taskId) : empty();
+	}
+
+	public LocalDate getDate() {
+		return date;
+	}
+
+	public List<Integer> getObjectIds() {
+		return objectIds;
+	}
 }

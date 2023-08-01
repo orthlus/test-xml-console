@@ -1,3 +1,5 @@
+package common;
+
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
@@ -19,7 +21,7 @@ public class Args {
 	private Args() {
 	}
 
-	static void init(String[] args) {
+	public static void init(String[] args) {
 		Args instance = getInstance();
 		try {
 			JCommander jCommander = JCommander.newBuilder().addObject(instance).build();

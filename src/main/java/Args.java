@@ -27,8 +27,10 @@ public class Args {
 			if (instance.help) {
 				log.info("Была вызвана справка использования консоли.");
 				jCommander.usage();
+				System.exit(0);
 			}
 		} catch (ParameterException e) {
+			e.printStackTrace();
 			e.usage();
 			System.exit(1);
 		}
@@ -51,8 +53,8 @@ public class Args {
 	@Parameter(names = {"-hierarchy", "-hierarchy-file"}, description = "path to xml hierarchy file. by default file 'AS_ADM_HIERARCHY.XML' looking in current directory")
 	private String hierarchyFilePath;
 	@Parameter(names = {"-date", "-d"}, description = "required for task 1. date format yyyy-MM-dd")
-	private LocalDate date;
-	@Parameter(names = {"-objects", "-o"}, variableArity = true, description = "required for task 1. list number with comma delimiter")
+	private String date;
+	@Parameter(names = {"-objects", "-o"}, variableArity = true, description = "required for task 1. list number with comma or space delimiter")
 	private List<Integer> objectIds;
 
 	public Optional<String> getObjectsFile() {
@@ -68,7 +70,7 @@ public class Args {
 	}
 
 	public LocalDate getDate() {
-		return date;
+		return LocalDate.parse(date);
 	}
 
 	public Set<Integer> getObjectIds() {

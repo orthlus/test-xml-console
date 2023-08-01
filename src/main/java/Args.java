@@ -27,12 +27,10 @@ public class Args {
 			if (instance.help) {
 				log.info("Была вызвана справка использования консоли.");
 				jCommander.usage();
-				throw new RuntimeException();
 			}
 		} catch (ParameterException e) {
-			e.printStackTrace();
 			e.usage();
-			throw new RuntimeException("Не валидные параметры запуска.");
+			System.exit(1);
 		}
 	}
 

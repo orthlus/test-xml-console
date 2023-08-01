@@ -1,4 +1,5 @@
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import entity.Converter;
 import lombok.extern.slf4j.Slf4j;
 import models.*;
 import org.jooq.lambda.tuple.Tuple;
@@ -20,9 +21,6 @@ public class Main {
 		Args.init(args);
 		Args params = Args.getInstance();
 		main0(params);
-
-		Path objectFile = Path.of("xml/AS_ADDR_OBJ.XML");
-		Path hierarchyFile = Path.of("xml/AS_ADM_HIERARCHY.XML");
 	}
 
 	private static void main0(Args args) {
@@ -89,7 +87,7 @@ public class Main {
 		try {
 			return xml.readValue(Files.readString(file), AddrObjectList.class).getObjects();
 		} catch (IOException e) {
-			log.error("Error reading objects file {}", file, e);
+			log.error("Error reading objects file {}", file);
 			return List.of();
 		}
 	}
@@ -98,7 +96,7 @@ public class Main {
 		try {
 			return xml.readValue(Files.readString(file), AdmHierarchyList.class).getElements();
 		} catch (IOException e) {
-			log.error("Error reading hierarchy file {}", file, e);
+			log.error("Error reading hierarchy file {}", file);
 			return List.of();
 		}
 	}

@@ -40,13 +40,13 @@ public class Args {
 	@Parameter(names = "-help", help = true)
 	private boolean help = false;
 
-	@Parameter(names = "-task", required = true, description = "task number for run")
+	@Parameter(names = {"-task", "-t"}, required = true, description = "task number for run")
 	private int taskId;
-	@Parameter(names = "-objects-file", description = "path to xml object file. by default file 'AS_ADDR_OBJ.XML' looking in current directory")
+	@Parameter(names = {"-objects-file", "-obj"}, description = "path to xml object file. by default file 'AS_ADDR_OBJ.XML' looking in current directory")
 	private String objectsFilePath;
-	@Parameter(names = "-hierarchy-file", description = "path to xml hierarchy file. by default file 'AS_ADM_HIERARCHY.XML' looking in current directory")
+	@Parameter(names = {"-hierarchy", "-hierarchy-file"}, description = "path to xml hierarchy file. by default file 'AS_ADM_HIERARCHY.XML' looking in current directory")
 	private String hierarchyFilePath;
-	@Parameter(names = "-date", description = "required for task 1. date format yyyy-MM-dd")
+	@Parameter(names = {"-date", "-d"}, description = "required for task 1. date format yyyy-MM-dd")
 	private LocalDate date;
 	@Parameter(names = {"-objects", "-o"}, variableArity = true, description = "required for task 1. list number with comma delimiter")
 	private List<Integer> objectIds;

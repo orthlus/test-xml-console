@@ -7,7 +7,9 @@ import org.jooq.lambda.tuple.Tuple2;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Stream;
 
 @Slf4j
@@ -35,11 +37,15 @@ public class Main {
 
 		switch (args.taskId().get()) {
 			case 1 -> {
-
+				LocalDate date = args.getDate();
+				Set<Integer> objectIds = args.getObjectIds();
+				Converter.addrs(objects).stream()
+						.filter(o -> o.startDate().isBefore(date))
+						.filter(o -> o.endDate().isAfter(date))
+						.filter(o -> objectIds.contains(o.id()))
+						.forEach(o -> System.out.printf("%d %s", o.id(), o.name()));
 			}
-			case 2 -> {
-
-			}
+			case 2 -> log.info("Task 2 not implemented");
 		}
 	}
 

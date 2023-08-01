@@ -4,8 +4,10 @@ import com.beust.jcommander.ParameterException;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
@@ -71,7 +73,7 @@ public class Args {
 		return date;
 	}
 
-	public List<Integer> getObjectIds() {
-		return objectIds;
+	public Set<Integer> getObjectIds() {
+		return new HashSet<>(objectIds);
 	}
 }

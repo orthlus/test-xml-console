@@ -22,7 +22,7 @@ public class AddrObject {
 	@JacksonXmlProperty(localName = "NAME")
 	private String name;
 	@JacksonXmlProperty(localName = "TYPENAME")
-	private String typename;
+	private String typeName;
 	@JacksonXmlProperty(localName = "LEVEL")
 	private String level;
 	@JacksonXmlProperty(localName = "OPERTYPEID")
@@ -45,6 +45,6 @@ public class AddrObject {
 	@Override
 	public String toString() {
 		return "AddrObject{id='%s', objectId='%s', objectGUID='%s', changeId='%s', name='%s', typename='%s', level='%s', operTypeId='%s', prevId='%s', nextId='%s', updateDate='%s', startDate='%s', endDate='%s', isActual='%s', isActive='%s'}"
-				.formatted(id, objectId, objectGUID, changeId, name, typename, level, operTypeId, prevId, nextId, updateDate, startDate, endDate, isActual, isActive);
+				.formatted(id, objectId, objectGUID, changeId, name, typeName, level, operTypeId, prevId, nextId, updateDate, startDate, endDate, isActual, isActive);
 	}
 }

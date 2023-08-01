@@ -43,7 +43,7 @@ public class Main {
 						.filter(o -> o.startDate().isBefore(date))
 						.filter(o -> o.endDate().isAfter(date))
 						.filter(o -> objectIds.contains(o.id()))
-						.forEach(o -> System.out.printf("%d %s%n", o.id(), o.name()));
+						.forEach(o -> System.out.printf("%d: %s %s%n", o.id(), o.typeName(), o.name()));
 			}
 			case 2 -> log.info("Task 2 not implemented");
 		}

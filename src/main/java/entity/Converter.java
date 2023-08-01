@@ -14,6 +14,7 @@ public class Converter {
 		return new Addr(
 				Integer.parseInt(object.getObjectId()),
 				object.getName(),
+				object.getTypename(),
 				LocalDate.parse(object.getStartDate()),
 				LocalDate.parse(object.getEndDate())
 		);

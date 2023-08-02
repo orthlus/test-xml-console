@@ -58,15 +58,12 @@ public class Main {
 						.collect(Collectors.toSet());
 				Map<Integer, Addr> addrsMap = addrs.stream()
 						.collect(Collectors.toMap(Addr::id, a -> a, (a, b) -> b));
-				Set<HierarchyItem> hierarchyActive = hierarchy(hierarchy)
-						.stream()
-						.filter(HierarchyItem::isActive)
-						.collect(Collectors.toSet());
 
-				Map<Integer, HierarchyItem> hierarchyMap = hierarchyActive.stream()
+				Map<Integer, HierarchyItem> hierarchyMap = hierarchy(hierarchy).stream()
+						.filter(HierarchyItem::isActive)
 						.collect(Collectors.toMap(HierarchyItem::id, a -> a, (a, b) -> b));
 
-				for (HierarchyItem child : hierarchyActive) {
+				for (HierarchyItem child : hierarchyMap.values()) {
 					if (!childrenIds.contains(child.id())) continue;
 
 					HierarchyItem parent = hierarchyMap.get(child.parentId());

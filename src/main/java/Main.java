@@ -66,14 +66,10 @@ public class Main {
 				for (HierarchyItem child : hierarchyMap.values()) {
 					if (!childrenIds.contains(child.id())) continue;
 
-					HierarchyItem parent = hierarchyMap.get(child.parentId());
-					HierarchyItem parent2 = hierarchyMap.get(parent.parentId());
-					if (parent2.parentId() == 0) {
-						printChain(addrsMap, parent2, parent, child);
-					} else {
-						HierarchyItem parent3 = hierarchyMap.get(parent2.parentId());
-						printChain(addrsMap, parent3, parent2, parent, child);
-					}
+					HierarchyItem parent = getParent(child, hierarchyMap);
+					HierarchyItem parent2 = getParent(parent, hierarchyMap);
+					HierarchyItem parent3 = getParent(parent2, hierarchyMap);
+					printChain(addrsMap, parent3, parent2, parent, child);
 				}
 			}
 		}
@@ -81,6 +77,7 @@ public class Main {
 
 	private static void printChain(Map<Integer, Addr> addrsMap, HierarchyItem... chain) {
 		String s = Arrays.stream(chain)
+				.filter(Objects::nonNull)
 				.map(i -> getName(i, addrsMap))
 				.collect(Collectors.joining(", "));
 		System.out.println(s);
@@ -89,6 +86,10 @@ public class Main {
 	private static String getName(HierarchyItem item, Map<Integer, Addr> addrsMap) {
 		Addr addr = addrsMap.get(item.id());
 		return addr.typeName() + " " + addr.name();
+	}
+
+	private static HierarchyItem getParent(HierarchyItem item, Map<Integer, HierarchyItem> hierarchy) {
+		return item.parentId() == 0 ? null : hierarchy.get(item.parentId());
 	}
 
 	private static Tuple2<List<AddrObject>, List<AdmHierarchy>> readFiles(Args args) {

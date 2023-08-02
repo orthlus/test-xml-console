@@ -63,11 +63,9 @@ public class Main {
 						.filter(HierarchyItem::isActive)
 						.collect(Collectors.toMap(HierarchyItem::id, a -> a, (a, b) -> b));
 
-				for (HierarchyItem child : hierarchyMap.values()) {
-					if (!childrenIds.contains(child.id())) continue;
-
-					printChain(addrsMap, getParents(child, 3, hierarchyMap));
-				}
+				hierarchyMap.values().stream()
+						.filter(child -> childrenIds.contains(child.id()))
+						.forEach(child -> printChain(addrsMap, getParents(child, 3, hierarchyMap)));
 			}
 		}
 	}

@@ -69,14 +69,21 @@ public class Main {
 					HierarchyItem parent = hierarchyMap.get(child.parentId());
 					HierarchyItem parent2 = hierarchyMap.get(parent.parentId());
 					if (parent2.parentId() == 0) {
-						System.out.printf("%s, %s, %s%n", getName(parent2, addrsMap), getName(parent, addrsMap), getName(child, addrsMap));
+						printChain(addrsMap, parent2, parent, child);
 					} else {
 						HierarchyItem parent3 = hierarchyMap.get(parent2.parentId());
-						System.out.printf("%s, %s, %s, %s%n", getName(parent3, addrsMap), getName(parent2, addrsMap), getName(parent, addrsMap), getName(child, addrsMap));
+						printChain(addrsMap, parent3, parent2, parent, child);
 					}
 				}
 			}
 		}
+	}
+
+	private static void printChain(Map<Integer, Addr> addrsMap, HierarchyItem... chain) {
+		String s = Arrays.stream(chain)
+				.map(i -> getName(i, addrsMap))
+				.collect(Collectors.joining(", "));
+		System.out.println(s);
 	}
 
 	private static String getName(HierarchyItem item, Map<Integer, Addr> addrsMap) {

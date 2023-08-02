@@ -66,13 +66,33 @@ public class Main {
 				for (HierarchyItem child : hierarchyMap.values()) {
 					if (!childrenIds.contains(child.id())) continue;
 
-					HierarchyItem parent = getParent(child, hierarchyMap);
-					HierarchyItem parent2 = getParent(parent, hierarchyMap);
-					HierarchyItem parent3 = getParent(parent2, hierarchyMap);
-					printChain(addrsMap, parent3, parent2, parent, child);
+					printChain(addrsMap, getParents(child, 3, hierarchyMap));
 				}
 			}
 		}
+	}
+
+	private static List<HierarchyItem> getParents(HierarchyItem item, int deep, Map<Integer, HierarchyItem> hierarchyMap) {
+		Set<HierarchyItem> res = new LinkedHashSet<>();
+		res.add(item);
+		HierarchyItem last = item;
+		for (int i = 0; i < deep; i++) {
+			HierarchyItem parent = getParent(last, hierarchyMap);
+			res.add(parent);
+			last = parent;
+		}
+		// развернуть set
+		ArrayList<HierarchyItem> arr = new ArrayList<>(res);
+		Collections.reverse(arr);
+		return arr;
+	}
+
+	private static void printChain(Map<Integer, Addr> addrsMap, Collection<HierarchyItem> chain) {
+		String s = chain.stream()
+				.filter(Objects::nonNull)
+				.map(i -> getName(i, addrsMap))
+				.collect(Collectors.joining(", "));
+		System.out.println(s);
 	}
 
 	private static void printChain(Map<Integer, Addr> addrsMap, HierarchyItem... chain) {

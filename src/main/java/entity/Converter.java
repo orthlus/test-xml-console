@@ -15,8 +15,6 @@ public class Converter {
 		return new HierarchyItem(
 				Integer.parseInt(object.getObjectId()),
 				Integer.parseInt(object.getParentObjId()),
-				LocalDate.parse(object.getStartDate()),
-				LocalDate.parse(object.getEndDate()),
 				parseBool(object.getIsActive())
 		);
 	}

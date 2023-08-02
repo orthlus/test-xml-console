@@ -20,6 +20,9 @@ import static entity.Converter.hierarchy;
 public class Main {
 	public static void main(String[] args) {
 		Args.init(args);
+//		Args.init(new String[]{"-t", "1", "-hierarchy", "xml/AS_ADM_HIERARCHY.XML", "-obj", "xml/AS_ADDR_OBJ.XML", "-d", "2010-01-01", "-o", "1422396,1450759,1449192,1451562"});
+//		Args.init(new String[]{"-t", "1", "-d", "2010-01-01", "-o", "1422396,1450759,1449192,1451562"});
+//		Args.init(new String[]{"-t", "2"});
 		Args params = Args.getInstance();
 		main0(params);
 	}

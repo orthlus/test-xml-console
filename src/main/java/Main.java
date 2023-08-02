@@ -63,25 +63,19 @@ public class Main {
 						.filter(HierarchyItem::isActive)
 						.collect(Collectors.toSet());
 
+				Map<Integer, HierarchyItem> hierarchyMap = hierarchyActive.stream()
+						.collect(Collectors.toMap(HierarchyItem::id, a -> a, (a, b) -> b));
+
 				for (HierarchyItem child : hierarchyActive) {
 					if (!childrenIds.contains(child.id())) continue;
 
-					for (HierarchyItem parent : hierarchyActive) {
-						if (child.parentId() == parent.id()) {
-							for (HierarchyItem parent2 : hierarchyActive) {
-								if (parent.parentId() == parent2.id()) {
-									if (parent2.parentId() == 0) {
-										System.out.printf("%s, %s, %s%n", getName(parent2, addrsMap), getName(parent, addrsMap), getName(child, addrsMap));
-									} else {
-										for (HierarchyItem parent3 : hierarchyActive) {
-											if (parent2.parentId() == parent3.id()) {
-												System.out.printf("%s, %s, %s, %s%n", getName(parent3, addrsMap), getName(parent2, addrsMap), getName(parent, addrsMap), getName(child, addrsMap));
-											}
-										}
-									}
-								}
-							}
-						}
+					HierarchyItem parent = hierarchyMap.get(child.parentId());
+					HierarchyItem parent2 = hierarchyMap.get(parent.parentId());
+					if (parent2.parentId() == 0) {
+						System.out.printf("%s, %s, %s%n", getName(parent2, addrsMap), getName(parent, addrsMap), getName(child, addrsMap));
+					} else {
+						HierarchyItem parent3 = hierarchyMap.get(parent2.parentId());
+						System.out.printf("%s, %s, %s, %s%n", getName(parent3, addrsMap), getName(parent2, addrsMap), getName(parent, addrsMap), getName(child, addrsMap));
 					}
 				}
 			}
